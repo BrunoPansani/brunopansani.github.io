@@ -1,0 +1,3 @@
+[submodule "life-game"]
+	path = life-game
+	url = https://github.com/BrunoPansani/life-game
