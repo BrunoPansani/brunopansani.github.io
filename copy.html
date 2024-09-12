@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect and Copy</title>
+    <script>
+        window.onload = function() {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            // Get the 'copy' parameter (the string to be copied)
+            const copyValue = urlParams.get('copy');
+            // Get the 'redirect' parameter (the URL to redirect to)
+            const redirectUrl = urlParams.get('redirect');
+
+            if (copyValue) {
+                // Copy the 'copy' parameter value to the clipboard
+                navigator.clipboard.writeText(copyValue).then(function() {
+                    console.log('Copied to clipboard:', copyValue);
+                    // If there's a redirect URL, navigate there after copying
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
+                }).catch(function(err) {
+                    console.error('Could not copy text: ', err);
+                    // Even if the copy fails, redirect
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
+                });
+            } else {
+                // If no 'copy' parameter is found, just redirect
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <p>Processing...</p>
+</body>
+</html>
